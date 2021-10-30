@@ -42,9 +42,22 @@ namespace RMDesktopUI.ViewModels
             }
         }
 
-        private BindingList<string> _cart;
+        private ProductModel _SelectedIProduct;
 
-        public BindingList<string> Cart
+        public ProductModel SelectedIProduct
+        {
+            get { return _SelectedIProduct; }
+            set {
+                _SelectedIProduct = value;
+                NotifyOfPropertyChange(() => SelectedIProduct);
+                NotifyOfPropertyChange(() => CanAddToCart);
+            }
+        }
+
+
+        private BindingList<CartItemModel> _cart = new BindingList<CartItemModel>();
+
+        public BindingList<CartItemModel> Cart
         {
             get { return _cart; }
             set 
@@ -55,7 +68,7 @@ namespace RMDesktopUI.ViewModels
         }
 
 
-        private int _itemQuantity;
+        private int _itemQuantity = 1;
 
         public int ItemQuantity
         {
@@ -65,6 +78,7 @@ namespace RMDesktopUI.ViewModels
                 _itemQuantity = value;
                 
                 NotifyOfPropertyChange(() => ItemQuantity);
+                NotifyOfPropertyChange(() => CanAddToCart);
             }
         }
 
@@ -72,8 +86,12 @@ namespace RMDesktopUI.ViewModels
         {
             get
             {
-                //TO DO - Replace with calculation
-                return "$0.00";
+                decimal subTotal = 0;
+                foreach (var item in Cart)
+                {
+                   subTotal += (item.Product.RetailPrice * item.QuantityInCart);
+                }
+                return subTotal.ToString("C");
             }
         }
 
@@ -103,12 +121,40 @@ namespace RMDesktopUI.ViewModels
 
                 //Make sure a product is selected
                 //Make Sure theres is an item quantity
+                if (ItemQuantity > 0 && SelectedIProduct?.QuantityInStock >= ItemQuantity)
+                {
+                    output = true;
+                }
+
 
                 return output;
             }
         }
         public void AddToCart()
         {
+            CartItemModel existingItem = Cart.FirstOrDefault(x => x.Product == SelectedIProduct);
+
+            if (existingItem != null)
+            {
+                existingItem.QuantityInCart += ItemQuantity;
+                //Gambiarra para NotifyOfPropertyChange(() => Cart); funcionar e atualizar o a quantidade de items no carrinho (arrumar)
+                Cart.Remove(existingItem);
+                Cart.Add(existingItem);
+            }
+            else
+            {
+                CartItemModel item = new CartItemModel()
+                {
+                    Product = SelectedIProduct,
+                    QuantityInCart = ItemQuantity
+                };
+                Cart.Add(item);                
+            }
+
+            SelectedIProduct.QuantityInStock -= ItemQuantity;
+            ItemQuantity = 1;
+            NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Cart);
 
         }
         public bool CanRemoveFromCart
@@ -125,7 +171,7 @@ namespace RMDesktopUI.ViewModels
         }
         public void RemoveFromCart()
         {
-
+            NotifyOfPropertyChange(() => SubTotal);
         }
 
         public bool CanCheckOut
