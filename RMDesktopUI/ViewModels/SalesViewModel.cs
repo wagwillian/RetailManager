@@ -27,22 +27,24 @@ namespace RMDesktopUI.ViewModels
         public BindingList<string> Cart
         {
             get { return _cart; }
-            set {
+            set 
+            {
                 _cart = value;
                 NotifyOfPropertyChange(() => Cart);
             }
         }
 
 
-        private string _itemQuantity;
+        private int _itemQuantity;
 
-        public string ItemQuantity
+        public int ItemQuantity
         {
             get { return _itemQuantity; }
-            set {
+            set
+            {
                 _itemQuantity = value;
-                // notificar em produtos???
-                NotifyOfPropertyChange(() => Products);
+                
+                NotifyOfPropertyChange(() => ItemQuantity);
             }
         }
 
