@@ -19,5 +19,7 @@ namespace RMDataManager.Library.Models
         /// Current quantity in stock
         /// </summary>
         public int QuantityInStock { get; set; }
+        public bool IsTaxable { get; set; }
+
     }
 }
