@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace DataManager.Controllers
+namespace RMDataManager.Controllers
 {
     [Authorize]
     public class ProductController : ApiController

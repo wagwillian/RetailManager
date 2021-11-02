@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace DataManager.Results
+namespace RMDataManager.Results
 {
     public class ChallengeResult : IHttpActionResult
     {

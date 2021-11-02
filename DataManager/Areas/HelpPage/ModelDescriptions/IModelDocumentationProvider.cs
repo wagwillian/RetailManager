@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace DataManager.Areas.HelpPage.ModelDescriptions
+namespace RMDataManager.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataManager.Models
+namespace RMDataManager.Models
 {
     // Models returned by AccountController actions.
 

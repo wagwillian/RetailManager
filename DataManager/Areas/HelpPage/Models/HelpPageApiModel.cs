@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using DataManager.Areas.HelpPage.ModelDescriptions;
+using RMDataManager.Areas.HelpPage.ModelDescriptions;
 
-namespace DataManager.Areas.HelpPage.Models
+namespace RMDataManager.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

@@ -9,9 +9,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using DataManager.Models;
+using RMDataManager.Models;
 
-namespace DataManager.Providers
+namespace RMDataManager.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {

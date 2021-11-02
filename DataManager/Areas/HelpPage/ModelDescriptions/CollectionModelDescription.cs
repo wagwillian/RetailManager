@@ -1,4 +1,4 @@
-namespace DataManager.Areas.HelpPage.ModelDescriptions
+namespace RMDataManager.Areas.HelpPage.ModelDescriptions
 {
     public class CollectionModelDescription : ModelDescription
     {

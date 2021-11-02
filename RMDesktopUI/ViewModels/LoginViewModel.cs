@@ -13,8 +13,9 @@ namespace RMDesktopUI.ViewModels
 {
     public class LoginViewModel : Screen
     {
-        private string _userName;
-        private string _password;
+        //REMOVER VALORES PADRÃO
+        private string _userName = "wag_willian@hotmail.com";
+        private string _password = "Senha123.";
         private IAPIHelper _apiHelper;
         private IEventAggregator _events;
 

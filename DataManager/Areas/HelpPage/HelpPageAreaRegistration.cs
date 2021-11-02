@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace DataManager.Areas.HelpPage
+namespace RMDataManager.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

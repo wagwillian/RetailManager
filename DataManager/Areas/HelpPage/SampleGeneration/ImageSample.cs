@@ -1,6 +1,6 @@
 using System;
 
-namespace DataManager.Areas.HelpPage
+namespace RMDataManager.Areas.HelpPage
 {
     /// <summary>
     /// This represents an image sample on the help page. There's a display template named ImageSample associated with this class.

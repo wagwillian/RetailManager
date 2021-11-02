@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace DataManager
+namespace RMDataManager
 {
     public class BundleConfig
     {

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace DataManager
+namespace RMDataManager
 {
     public class FilterConfig
     {

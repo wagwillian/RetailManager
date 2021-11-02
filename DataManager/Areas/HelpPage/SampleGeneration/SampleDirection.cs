@@ -1,4 +1,4 @@
-namespace DataManager.Areas.HelpPage
+namespace RMDataManager.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

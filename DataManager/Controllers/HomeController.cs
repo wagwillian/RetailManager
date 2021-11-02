@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace DataManager.Controllers
+namespace RMDataManager.Controllers
 {
     public class HomeController : Controller
     {

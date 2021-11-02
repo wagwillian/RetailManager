@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace DataManager.App_Start
+namespace RMDataManager.App_Start
 {
     public class AuthTokenOperation : IDocumentFilter
     {

@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Http;
 
 
-namespace DataManager.Controllers
+namespace RMDataManager.Controllers
 {
     
     [Authorize]    
