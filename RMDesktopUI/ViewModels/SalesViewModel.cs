@@ -32,6 +32,7 @@ namespace RMDesktopUI.ViewModels
         {
             base.OnViewLoaded(view);
             await LoadProducts();
+            
         }
 
         private async Task LoadProducts()
@@ -58,11 +59,23 @@ namespace RMDesktopUI.ViewModels
         public ProductDisplayModel SelectedIProduct
         {
             get { return _SelectedIProduct; }
-            set {
+            set
+            {
                 _SelectedIProduct = value;
                 NotifyOfPropertyChange(() => SelectedIProduct);
                 NotifyOfPropertyChange(() => CanAddToCart);
             }
+        }
+
+        private async Task ResetSalesViewModel()
+        {
+            Cart = new BindingList<CartItemDisplayModel>();
+            await LoadProducts();
+
+            NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
         }
 
         private CartItemDisplayModel _selectedCartItem;
@@ -212,7 +225,7 @@ namespace RMDesktopUI.ViewModels
                 bool output = false;
 
                 //Make sure a product is selected && adiciona um bug não poder remover item quando o stock esta vazio.
-                if (SelectedCartItem != null) //&& SelectedCartItem?.Product.QuantityInStock > 0)
+                if (SelectedCartItem != null&& SelectedCartItem?.QuantityInCart > 0)
                 {
                     output = true;
                 }
@@ -237,6 +250,7 @@ namespace RMDesktopUI.ViewModels
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
             NotifyOfPropertyChange(() => CanCheckOut);
+            NotifyOfPropertyChange(() => CanAddToCart);
         }
 
         public bool CanCheckOut
@@ -269,6 +283,8 @@ namespace RMDesktopUI.ViewModels
                 });
             }
             await _saleEndPoint.PostSale(sale);
+
+            await ResetSalesViewModel();
 
 
         }
