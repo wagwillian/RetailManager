@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="de096f17-e81a-44e3-ac36-35529f39fbf6" ChangeDateTime="10/24/2021 00:18:30">
+    <Property Name="ElementName" Value="[dbo].[SaleDetail].[Tax]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SaleDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Quantity" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c18a54c9-0f85-45c4-85c4-c2132e744ad3" ChangeDateTime="10/24/2021 00:18:52">
+    <Property Name="ElementName" Value="[dbo].[SaleDetail].[Quantity]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SaleDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PurchasePrice" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e582a38b-c32c-4665-bf8a-2b577f5ae336" ChangeDateTime="10/24/2021 00:24:42">
+    <Property Name="ElementName" Value="[dbo].[Inventory].[PurchaseDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Inventory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CeDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a816f78f-469f-48e3-b634-0e24a6997bb5" ChangeDateTime="10/24/2021 00:24:50">
+    <Property Name="ElementName" Value="[dbo].[Inventory].[CeDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Inventory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreateDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="28e2cad5-10d5-4bc1-9d64-b31cca2b1f62" ChangeDateTime="10/30/2021 10:39:41">
+    <Property Name="ElementName" Value="[dbo].[Product].[Descriotion]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Description" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8832807b-e825-4403-bdf6-60bf65caadf6" ChangeDateTime="11/01/2021 15:08:43">
+    <Property Name="ElementName" Value="[dbo].[FK_Inventory_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Inventory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_Inventory_ToProduct]" />
+  </Operation>
+</Operations>
