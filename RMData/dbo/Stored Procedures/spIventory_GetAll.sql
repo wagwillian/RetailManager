@@ -4,6 +4,6 @@ AS
 begin
 	set nocount on;
 	select [ProductId], [Quantity], [PurchasePrice], [PurchaseDate]
-	from dbo.inventory;
+	from dbo.Inventory;
 
 end
