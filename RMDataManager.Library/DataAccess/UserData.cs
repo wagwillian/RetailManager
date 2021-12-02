@@ -1,4 +1,5 @@
-﻿using RMDataManager.Library.Internal.DataAccess;
+﻿using Microsoft.Extensions.Configuration;
+using RMDataManager.Library.Internal.DataAccess;
 using RMDataManager.Library.Models;
 using System.Collections.Generic;
 
@@ -6,9 +7,15 @@ namespace RMDataManager.Library.DataAccess
 {
     public class UserData
     {
+        private readonly IConfiguration _config;
+
+        public UserData(IConfiguration config)
+        {
+            _config = config;
+        }
         public List<UserModel> GetUserById(string Id)
         {
-            SqlDataAccess sql = new SqlDataAccess();
+            SqlDataAccess sql = new SqlDataAccess(_config);
 
             var p = new { Id = Id };
 
