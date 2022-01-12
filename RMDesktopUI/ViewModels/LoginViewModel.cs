@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 
@@ -105,7 +106,7 @@ namespace RMDesktopUI.ViewModels
                 //Capture more information about the logged user
                 await _apiHelper.GetLoggedInUserInfo(result.AccessToken);
 
-                _events.PublishOnUIThread(new LogOnEvent());
+                await _events.PublishOnUIThreadAsync(new LogOnEvent(), new CancellationToken());
             }
             catch (Exception ex)
             {
