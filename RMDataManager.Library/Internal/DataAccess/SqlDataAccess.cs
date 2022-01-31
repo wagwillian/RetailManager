@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,9 +14,10 @@ namespace RMDataManager.Library.Internal.DataAccess
 {
     public class SqlDataAccess : IDisposable, ISqlDataAccess
     {
-        public SqlDataAccess(IConfiguration config)
+        public SqlDataAccess(IConfiguration config, ILogger<SqlDataAccess> logger)
         {
             _config = config;
+            _logger = logger;
         }
         public string GetConnectionString(string name)
         {
@@ -59,7 +61,7 @@ namespace RMDataManager.Library.Internal.DataAccess
 
             _transaction = _connection.BeginTransaction();
 
-            isClosed = false;
+            _isClosed = false;
         }
 
         public List<T> LoadDataInTransaction<T, U>(string storedProcedure, U parameters)
@@ -77,35 +79,36 @@ namespace RMDataManager.Library.Internal.DataAccess
                 commandType: CommandType.StoredProcedure, transaction: _transaction);
         }
 
-        private bool isClosed = false;
+        private bool _isClosed = false;
         private readonly IConfiguration _config;
+        private readonly ILogger _logger;
 
         public void CommitTransaction()
         {
             _transaction?.Commit();
             _connection?.Close();
-            isClosed = true;
+            _isClosed = true;
         }
 
         public void RollbackTransaction()
         {
             _transaction?.Rollback();
             _connection?.Close();
-            isClosed = true;
+            _isClosed = true;
 
         }
 
         public void Dispose()
         {
-            if (isClosed == false)
+            if (_isClosed == false)
             {
                 try
                 {
                     CommitTransaction();
                 }
-                catch
+                catch (Exception ex)
                 {
-                    //TODO - Log this issue.
+                    _logger.LogError(ex, "Commit transaction failed in the dispose methord.");
                 }
             }
             _transaction = null;
