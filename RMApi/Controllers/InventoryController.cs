@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 namespace RMApi.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
