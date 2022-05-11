@@ -12,6 +12,7 @@ namespace RMApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
+
     public class InventoryController : ControllerBase
     {
         private readonly IInventoryData _inventoryData;
