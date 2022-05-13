@@ -12,6 +12,7 @@ namespace RMDataManager.Library
         public static decimal GetTaxRate()
         {
 
+            
             string rateText = ConfigurationManager.AppSettings["taxRate"];
 
             bool IsValidTaxRate = Decimal.TryParse(rateText, out decimal output);
