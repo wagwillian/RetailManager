@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RMDesktopUI.Models
+namespace RMDesktopUI.Library.Models
 {
     public class AuthenticatedUser
     {
         public string AccessToken { get; set; }
         public string UserName { get; set; }
-    }   
+    }
 }

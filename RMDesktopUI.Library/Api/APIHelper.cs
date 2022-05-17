@@ -1,5 +1,4 @@
 ﻿using RMDesktopUI.Library.Models;
-using RMDesktopUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
