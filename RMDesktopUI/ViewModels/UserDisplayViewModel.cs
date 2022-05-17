@@ -46,6 +46,7 @@ namespace RMDesktopUI.ViewModels
                 //arrumar, atualmente usando um metodo asincrono de forma sincrona no bueno.
                 LoadRoles();
                 NotifyOfPropertyChange(() => SelectedUser);
+                
             }
         }
 
@@ -57,7 +58,8 @@ namespace RMDesktopUI.ViewModels
             set 
             {
                 _selectedUserRole = value;
-                NotifyOfPropertyChange(() => SelectedUserRole);
+                NotifyOfPropertyChange(() => SelectedUserRole);                
+                NotifyOfPropertyChange(() => CanRemoveSelectedRole);
             }
         }
 
@@ -70,6 +72,7 @@ namespace RMDesktopUI.ViewModels
             {
                 _selectedAvailableRole = value;
                 NotifyOfPropertyChange(() => SelectedAvailableRole);
+                NotifyOfPropertyChange(() => CanAddSelectedRole);                
             }
         }
 
@@ -162,6 +165,9 @@ namespace RMDesktopUI.ViewModels
         private async Task LoadRoles()
         {
             var roles = await _userEndpoint.GetAllRoles();
+
+            AvailableRoles.Clear();
+
             foreach (var role in roles)
             {
                 if (UserRoles.IndexOf(role.Value) < 0)
@@ -171,6 +177,20 @@ namespace RMDesktopUI.ViewModels
             }
         }
 
+        public bool CanAddSelectedRole
+        {
+            get
+            {
+                if (SelectedUser is null || SelectedAvailableRole is null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
         public async Task AddSelectedRole()
         {
             //colocar em um try catch e tratar exceções.
@@ -180,6 +200,21 @@ namespace RMDesktopUI.ViewModels
             AvailableRoles.Remove(SelectedAvailableRole);
 
 
+        }
+
+        public bool CanRemoveSelectedRole
+        {
+            get
+            {
+                if (SelectedUser is null || SelectedUserRole is null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
         }
 
         public async Task RemoveSelectedRole()
