@@ -11,4 +11,15 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\RMDesktopUI.Library\RMDesktopUI.Library.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Update="appsetting.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="appsetting.Production.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="appsettings.Development.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 </Project>
