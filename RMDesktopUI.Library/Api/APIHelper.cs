@@ -1,4 +1,5 @@
-﻿using RMDesktopUI.Library.Models;
+﻿using Microsoft.Extensions.Configuration;
+using RMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,11 +15,13 @@ namespace RMDesktopUI.Library.Api
     {
         private HttpClient _apiClient;
         private ILoggedInUserModel _loggedInUser;
+        private readonly IConfiguration _config;
 
-        public APIHelper(ILoggedInUserModel loggedInUser)
-        {
-            InitializeClient();
+        public APIHelper(ILoggedInUserModel loggedInUser, IConfiguration config)
+        {           
             _loggedInUser = loggedInUser;
+            _config = config;
+            InitializeClient();
         }
 
         public HttpClient ApiClient
@@ -30,7 +33,7 @@ namespace RMDesktopUI.Library.Api
         }
         private void InitializeClient()
         {
-            string api = ConfigurationManager.AppSettings["api"];
+            string api = _config.GetValue<string>("api");
 
             _apiClient = new HttpClient();
             _apiClient.BaseAddress = new Uri(api);

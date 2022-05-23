@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using Caliburn.Micro;
+using Microsoft.Extensions.Configuration;
 using RMDesktopUI.Helpers;
 using RMDesktopUI.Library.Api;
-using RMDesktopUI.Library.Helpers;
 using RMDesktopUI.Library.Models;
 using RMDesktopUI.Models;
 using RMDesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,11 +45,26 @@ namespace RMDesktopUI
             return output;
         }
         
+        private IConfiguration AddConfiguration()
+        {
+            IConfigurationBuilder builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+
+#if DEBUG
+            builder.AddJsonFile("appssetings.Development.json", optional: true, reloadOnChange: true);
+#else
+            builder.AddJsonFile("appssetings.Development.json", optional: true, reloadOnChange: true);
+#endif
+            return builder.Build();
+
+        }
+
         protected override void Configure()
         {
 
-            _container.Instance(ConfigureAutomapper());            
-            
+            _container.Instance(ConfigureAutomapper());           
+
             _container.Instance(_container)
                 .PerRequest<IProductEndPoint, ProductEndPoint>()
                 .PerRequest<IUserEndpoint, UserEndpoint>()
@@ -58,9 +74,9 @@ namespace RMDesktopUI
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
                 .Singleton<ILoggedInUserModel, LoggedInUserModel>()
-                .Singleton<IConfigHelper, ConfigHelper>()
                 .Singleton<IAPIHelper, APIHelper>();
 
+            _container.RegisterInstance(typeof(IConfiguration), "Iconfiguration", AddConfiguration());
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)

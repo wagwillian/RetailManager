@@ -7,15 +7,17 @@
 	<ItemGroup>
 	  <PackageReference Include="AutoMapper" Version="11.0.0" />
 	  <PackageReference Include="Caliburn.Micro" Version="4.0.173" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.19" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.19" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\RMDesktopUI.Library\RMDesktopUI.Library.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Update="appsetting.json">
+	  <None Update="appsettings.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="appsetting.Production.json">
+	  <None Update="appsettings.Production.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="appsettings.Development.json">
