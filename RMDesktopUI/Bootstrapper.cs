@@ -54,7 +54,7 @@ namespace RMDesktopUI
 #if DEBUG
             builder.AddJsonFile("appssetings.Development.json", optional: true, reloadOnChange: true);
 #else
-            builder.AddJsonFile("appssetings.Development.json", optional: true, reloadOnChange: true);
+            builder.AddJsonFile("appssetings.Production.json", optional: true, reloadOnChange: true);
 #endif
             return builder.Build();
 
