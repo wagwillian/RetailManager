@@ -11,7 +11,7 @@ namespace Portal.Authentication
     
     public static class JwtParser
     {
-        public static IEnumerable<Claim> ParseClaimsFromJWT(string jwt)
+        public static IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
         {
             var claims = new List<Claim>();
             var payload = jwt.Split(separator: '.')[1];

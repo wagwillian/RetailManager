@@ -41,11 +41,11 @@ namespace Portal.Authentication
             var result = JsonSerializer.Deserialize<AuthenticatedUserModel>(
                 authContent,
                 options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-            await _localStorage.SetItemAsync(key: "authToken", result.Access_Token);
+            await _localStorage.SetItemAsync(key: "authToken", result.AccessToken);
 
-            ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(result.Access_Token);
+            ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(result.AccessToken);
 
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Access_Token);
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.AccessToken);
 
             return result;
 
