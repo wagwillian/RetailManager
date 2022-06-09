@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Portal.Authentication;
+using RMDesktopUI.Library.Api;
+using RMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -24,6 +26,13 @@ namespace Portal
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddAuthorizationCore();
             builder.Services.AddScoped<AuthenticationStateProvider, AuthStateProvider>();
+
+            builder.Services.AddSingleton<IAPIHelper, APIHelper>();
+            builder.Services.AddSingleton<ILoggedInUserModel, LoggedInUserModel>();
+            builder.Services.AddTransient<IProductEndPoint, ProductEndPoint>();
+            builder.Services.AddTransient<IUserEndpoint, UserEndpoint>();
+            builder.Services.AddTransient<ISaleEndPoint, SaleEndPoint>();
+
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

@@ -39,7 +39,7 @@ namespace Portal.Authentication
                 new KeyValuePair<string, string>("password", userForAuthentication.Password)
             });
 
-            string api = _config[key:"apiLocation"] + _config[key:"tokenEndpoint"];
+            string api = _config[key:"api"] + _config[key:"tokenEndpoint"];
             var authResult = await _client.PostAsync(api, data);
             var authContent = await authResult.Content.ReadAsStringAsync();
 
