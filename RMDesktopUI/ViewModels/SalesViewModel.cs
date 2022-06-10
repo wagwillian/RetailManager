@@ -17,10 +17,10 @@ namespace RMDesktopUI.ViewModels
 {
     public class SalesViewModel : Screen
     {
-        IProductEndPoint _productEndPoint;
+        private readonly IProductEndPoint _productEndPoint;
         private readonly IConfiguration _config;
-        ISaleEndPoint _saleEndPoint;
-        IMapper _mapper;
+        private readonly ISaleEndPoint _saleEndPoint;
+        private readonly IMapper _mapper;
         private readonly StatusInfoViewModel _status;
         private readonly IWindowManager _window;
 
@@ -61,7 +61,7 @@ namespace RMDesktopUI.ViewModels
                     await _window.ShowDialogAsync(_status, null, settings);
                 }
 
-                TryCloseAsync();
+                await TryCloseAsync();
                 
             }
             
@@ -86,14 +86,14 @@ namespace RMDesktopUI.ViewModels
             }
         }
 
-        private ProductDisplayModel _SelectedIProduct;
+        private ProductDisplayModel _selectedIProduct;
 
         public ProductDisplayModel SelectedIProduct
         {
-            get { return _SelectedIProduct; }
+            get { return _selectedIProduct; }
             set
             {
-                _SelectedIProduct = value;
+                _selectedIProduct = value;
                 NotifyOfPropertyChange(() => SelectedIProduct);
                 NotifyOfPropertyChange(() => CanAddToCart);
             }
@@ -124,7 +124,7 @@ namespace RMDesktopUI.ViewModels
         }
 
 
-        private BindingList<CartItemDisplayModel> _cart = new BindingList<CartItemDisplayModel>();
+        private BindingList<CartItemDisplayModel> _cart = new();
 
         public BindingList<CartItemDisplayModel> Cart
         {
@@ -233,7 +233,7 @@ namespace RMDesktopUI.ViewModels
             }   
             else
             {
-                CartItemDisplayModel item = new CartItemDisplayModel()
+                CartItemDisplayModel item = new()
                 {
                     Product = SelectedIProduct,
                     QuantityInCart = ItemQuantity
@@ -304,7 +304,7 @@ namespace RMDesktopUI.ViewModels
         public async Task CheckOut()
         {
             //Create a SaleModel and post to API
-            SaleModel sale = new SaleModel();
+            SaleModel sale = new();
 
             foreach (var item in Cart)
             {

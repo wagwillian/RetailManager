@@ -14,11 +14,11 @@ namespace RMDesktopUI.ViewModels
 {
     public class LoginViewModel : Screen
     {
-        //REMOVER VALORES PADRÃO
+        
         private string _userName = "wag_willian@hotmail.com";
         private string _password = "Senha123.";
-        private IAPIHelper _apiHelper;
-        private IEventAggregator _events;
+        private readonly IAPIHelper _apiHelper;
+        private readonly IEventAggregator _events;
 
         public LoginViewModel(IAPIHelper apiHelper, IEventAggregator events)
         {
