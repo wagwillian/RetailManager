@@ -43,9 +43,9 @@ namespace RMDesktopUI.ViewModels
                 SelectedUserName = value.Email;
                 //Arrumar -> colocar na inicialização
                 UserRoles = new BindingList<string>(value.Roles.Select(x => x.Value).ToList());
-                
+
                 //arrumar, atualmente usando um metodo asincrono de forma sincrona no bueno, colocar em um metodo ou evento.
-                LoadRoles().Wait();
+                LoadRoles();
                 NotifyOfPropertyChange(() => SelectedUser);
                 
             }

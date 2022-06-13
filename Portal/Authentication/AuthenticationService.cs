@@ -52,7 +52,7 @@ namespace Portal.Authentication
                 options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             await _localStorage.SetItemAsync(authTokenStorageKey, result.AccessToken);
 
-            ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(result.AccessToken);
+            await ((AuthStateProvider)_authStateProvider).NotifyUserAuthentication(result.AccessToken);
 
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.AccessToken);
 
@@ -62,9 +62,8 @@ namespace Portal.Authentication
 
         public async Task Logout()
         {
-            await _localStorage.RemoveItemAsync(authTokenStorageKey);
-            ((AuthStateProvider)_authStateProvider).NotifyUserLogout();
-            _client.DefaultRequestHeaders.Authorization = null;
+            await ((AuthStateProvider)_authStateProvider).NotifyUserLogout();
+            
         }
     }
 }
