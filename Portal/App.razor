@@ -1,9 +1,17 @@
-﻿<Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
+﻿<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
     <Found Context="routeData">
         <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" > 
             <Authorizing>
                 <text>Please wait for the authentication.</text>
             </Authorizing>
+            <NotAuthorized>
+                <h1>You do not have Access</h1>
+                <p>
+                    The page or componoent you are trying to reach requires you to have more permissions than you currently do.
+                    Please contact the administrator if you think you have reached this page in error.
+                </p>
+            </NotAuthorized>
         </AuthorizeRouteView>
     </Found>
     <NotFound>
@@ -14,3 +22,4 @@
         </CascadingAuthenticationState>
     </NotFound>
 </Router>
+</CascadingAuthenticationState>
