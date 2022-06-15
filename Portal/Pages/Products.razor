@@ -1,5 +1,8 @@
 ﻿@page "/products"
+@using Microsoft.Extensions.Configuration
 @inject IProductEndPoint ProductEndPoint
+@inject IConfiguration config
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
 @attribute [Authorize(Roles = "Cashier")]
 
 <h3>Products</h3>
@@ -21,7 +24,14 @@
                         <div class="row">
                             <div class="col-12">
                                 <a href="">
-                                    <img src="https://dummyimage.com/1200x900/000/fff" class="img-fluid" alt="Placeholder image" />
+                                    @if(string.IsNullOrWhiteSpace(product.ProductImage))
+                                    {
+                                        <img src="https://dummyimage.com/1200x900/000/fff" class="img-fluid" alt="Placeholder image" />
+                                    }
+                                    else
+                                    {
+                                        <img src="@( $"{api}{product.ProductImage}" )"  class="img-fluid" alt="@product.ProductImage" />
+                                    }
                                 </a>
                                 <p class="my-2 text-justify">
                                     @product.Description
@@ -47,9 +57,35 @@
 
 @code {
     private List<ProductModel> products;
+    private string api;
+    private const string ProductListName = "productList";
+    private const string ProductCacheDate = "productCacheDate";
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()  
     {
-        products = await ProductEndPoint.GetAll();
+        api = config.GetValue<string>("api");
+
+        products = await localStorage.GetItemAsync<List<ProductModel>>(ProductListName);
+        DateTime? cacheDate = await localStorage.GetItemAsync<DateTime?>(ProductCacheDate);
+        double totalMinutes = 0;
+
+        if(cacheDate is not null)
+        {
+            totalMinutes = DateTime.UtcNow.Subtract((DateTime)cacheDate).TotalMinutes;
+        }
+
+        if (products is null || cacheDate is null || totalMinutes > 10)
+        {
+            try
+            {
+                products = await ProductEndPoint.GetAll();
+                await localStorage.SetItemAsync(ProductListName, products);
+                await localStorage.SetItemAsync(ProductCacheDate, DateTime.UtcNow);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
