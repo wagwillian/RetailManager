@@ -33,11 +33,10 @@ namespace RMDesktopUI.Library.Api
                 }
             }
         }
-        public async Task CreateProduct(ProductModel model)
+        public async Task CreateProduct(CreateProductModel model)
         {
             var data = new
             {
-                model.Id,
                 model.ProductName,
                 model.Description,
                 model.RetailPrice,
@@ -57,11 +56,6 @@ namespace RMDesktopUI.Library.Api
             }
 
 
-        }
-
-        public Task CreateProduct(CreateProductModel model)
-        {
-            throw new NotImplementedException();
-        }
+        }        
     }
 }
