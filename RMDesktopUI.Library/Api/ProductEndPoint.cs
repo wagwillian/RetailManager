@@ -16,6 +16,7 @@ namespace RMDesktopUI.Library.Api
         {
             _apiHelper = apiHelper;
         }
+                
 
         public async Task<List<ProductModel>> GetAll()
         {
@@ -31,6 +32,36 @@ namespace RMDesktopUI.Library.Api
                     throw new Exception(response.ReasonPhrase);
                 }
             }
+        }
+        public async Task CreateProduct(ProductModel model)
+        {
+            var data = new
+            {
+                model.Id,
+                model.ProductName,
+                model.Description,
+                model.RetailPrice,
+                model.QuantityInStock,
+                model.IsTaxable,
+                model.ProductImage
+
+            };
+
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/Product/Register", data))
+            {
+                if (response.IsSuccessStatusCode == false)
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+
+            }
+
+
+        }
+
+        public Task CreateProduct(CreateProductModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

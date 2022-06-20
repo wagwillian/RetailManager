@@ -1,0 +1,88 @@
+﻿@page "/products-register"
+@using Microsoft.Extensions.Configuration
+@inject IProductEndPoint ProducEndPoint
+@inject IConfiguration config
+@inject NavigationManager NavManager
+@attribute [Authorize]
+
+<h3>Products Register </h3>
+
+@if(string.IsNullOrWhiteSpace(errorMessage) == false)
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
+
+<EditForm Model="@model" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group row">
+        <label for="product-name" class="col-md-2 col-form-label">Product Name </label>
+        <div class="col-md-10">
+            <InputText id="product-name" class="form-control" @bind-Value="model.ProductName" />
+            <ValidationMessage For="@(() => model.ProductName)" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="Description" class="col-md-2 col-form-label">Description</label>
+        <div class="col-md-10">
+            <InputText id="Description" class="form-control" @bind-Value="model.Description" />
+            <ValidationMessage For="@(() => model.Description)" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="retail-price" class="col-md-2 col-form-label">Retail Price</label>
+        <div class="col-md-10">
+            <InputNumber id="retail-price" class="form-control" @bind-Value="model.RetailPrice" />
+            <ValidationMessage For="@(() => model.RetailPrice)" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="quantity-in-stock" class="col-md-2 col-form-label">Quantity In Stock</label>
+        <div class="col-md-10">
+            <InputNumber id="quantity-in-stock" class="form-control" @bind-Value="model.QuantityInStock" />
+            <ValidationMessage For="@(() => model.QuantityInStock)" />
+        </div>
+    </div>       
+
+    <div class="form-group row">
+        <label for="product-image" class="col-md-2 col-form-label">Product Image</label>
+        <div class="col-md-10">
+            <InputText id="product-image" class="form-control" @bind-Value="model.ProductImage" />
+            <ValidationMessage For="@(() => model.ProductImage)" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-success">Add Product</button>
+        </div>
+    </div>
+
+</EditForm>
+
+@code {
+    CreateProductModel model = new();
+    string errorMessage;
+
+    private async Task OnValidSubmit()
+    {
+        errorMessage = "";
+
+        try
+        {
+            model.IsTaxable = true;
+            await ProducEndPoint.CreateProduct(model);
+            NavManager.NavigateTo("/products-register");
+        }
+        catch(Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+
+}
