@@ -1,5 +1,4 @@
 ﻿CREATE PROCEDURE [dbo].[spProduct_Insert]
-	@Id int,
 	@ProductName nvarchar (100),
 	@Description nvarchar (MAX),
 	@RetailPrice MONEY,
@@ -12,6 +11,8 @@ AS
 begin
 	set nocount on;
 
-	insert into dbo.Product(Id, ProductName, [Description], RetailPrice, QuantityInStock, IsTaxable, ProductImage)
-	values (@Id, @ProductName, @Description, @RetailPrice, @QuantityInStock, @IsTaxable, @ProductImage)
+	insert into dbo.Product(ProductName, [Description], RetailPrice, QuantityInStock, IsTaxable, ProductImage)
+	values (@ProductName, @Description, @RetailPrice, @QuantityInStock, @IsTaxable, @ProductImage)
+
+	return SCOPE_IDENTITY()
 end

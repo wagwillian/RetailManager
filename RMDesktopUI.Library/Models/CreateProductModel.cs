@@ -12,6 +12,8 @@ namespace RMDesktopUI.Library.Models
     {
         
         [Required]
+        public int Id { get; set; }
+        [Required]
         [DisplayName("Product Name")]
         public string ProductName { get; set; }
         [Required]

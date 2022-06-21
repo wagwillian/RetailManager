@@ -47,12 +47,11 @@ namespace RMApi.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [Route("Register")]
-        public  Task ProductRegister(ProductRegistrationModel product)
+        public async Task<IActionResult> ProductRegister(ProductRegistrationModel product)
         {
 
             ProductModel p = new()
-            {
-                Id = product.Id,
+            {                                
                 ProductName = product.ProductName,
                 Description = product.Description,
                 RetailPrice = (decimal)product.RetailPrice,
@@ -62,7 +61,7 @@ namespace RMApi.Controllers
             };
 
             _productData.CreateProduct(p);
-            return Task.CompletedTask;
+            return Ok(p);
         }
 
 

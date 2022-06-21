@@ -37,6 +37,7 @@ namespace RMDesktopUI.Library.Api
         {
             var data = new
             {
+                
                 model.ProductName,
                 model.Description,
                 model.RetailPrice,
