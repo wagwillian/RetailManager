@@ -64,6 +64,15 @@ namespace RMApi.Controllers
             return Ok(p);
         }
 
+        [HttpGet("Id")]
+        [Authorize]        
+        public ProductModel GetProductById([FromRoute]int Id)
+        {
+            var product = _productData.GetProductById(Id);
+            return product;
+        }
+        
+
         [HttpPut]
         [Authorize]
         [Route("Update")]
@@ -71,6 +80,7 @@ namespace RMApi.Controllers
         {
             ProductModel p = new()
             {
+                Id = product.Id,
                 ProductName = product.ProductName,
                 Description = product.Description,
                 RetailPrice = (decimal)product.RetailPrice,

@@ -57,6 +57,24 @@ namespace RMDesktopUI.Library.Api
             }
         }
         
+        public async Task<ProductModel> GetProductById(int id)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync($"/api/Product/{id}"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<ProductModel>();
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+
+
+            }
+        }
+
         public async Task UpdateProduct(ProductModel model)
         {
             ProductModel product = new ProductModel();

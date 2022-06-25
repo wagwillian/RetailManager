@@ -304,8 +304,7 @@ namespace RMDesktopUI.ViewModels
         public async Task CheckOut()
         {
             //Create a SaleModel and post to API
-            SaleModel sale = new();
-            var productList = await _productEndPoint.GetAll();
+            SaleModel sale = new();           
 
 
             foreach (var item in Cart)
@@ -322,13 +321,9 @@ namespace RMDesktopUI.ViewModels
 
             foreach(var item in Cart)
             {
-                foreach (var product in productList)
-                {
-                    if (product.Id == item.Product.Id)
-                    {
-                        
-                    }
-                }
+                var product = await _productEndPoint.GetProductById(item.Product.Id);
+                product.QuantityInStock -= item.QuantityInCart;              
+
             }
 
             await ResetSalesViewModel();

@@ -9,5 +9,6 @@ namespace RMDesktopUI.Library.Api
         Task<List<ProductModel>> GetAll();
         Task CreateProduct(CreateProductModel model);
         Task UpdateProduct(ProductModel model);
+        Task<ProductModel> GetProductById(int id);
     }
 }
