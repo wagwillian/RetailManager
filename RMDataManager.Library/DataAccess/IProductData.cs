@@ -8,5 +8,6 @@ namespace RMDataManager.Library.DataAccess
         void CreateProduct(ProductModel product);
         ProductModel GetProductById(int productId);
         List<ProductModel> GetProducts();
+        void UpdateProduct(ProductModel product);
     }
 }

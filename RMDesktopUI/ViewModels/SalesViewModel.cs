@@ -305,6 +305,8 @@ namespace RMDesktopUI.ViewModels
         {
             //Create a SaleModel and post to API
             SaleModel sale = new();
+            var productList = await _productEndPoint.GetAll();
+
 
             foreach (var item in Cart)
             {
@@ -312,9 +314,22 @@ namespace RMDesktopUI.ViewModels
                 {
                     ProductId = item.Product.Id,
                     Quantity = item.QuantityInCart,
-                });
+                });                         
+
             }
+            
             await _saleEndPoint.PostSale(sale);
+
+            foreach(var item in Cart)
+            {
+                foreach (var product in productList)
+                {
+                    if (product.Id == item.Product.Id)
+                    {
+                        
+                    }
+                }
+            }
 
             await ResetSalesViewModel();
 

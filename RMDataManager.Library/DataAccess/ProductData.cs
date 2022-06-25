@@ -37,5 +37,10 @@ namespace RMDataManager.Library.DataAccess
         {
             _sql.SaveData("dbo.spProduct_Insert", new {product.ProductName, product.Description, product.RetailPrice, product.QuantityInStock, product.IsTaxable, product.ProductImage }, "RMData");
         }
+
+        public void UpdateProduct(ProductModel product)
+        {
+            _sql.SaveData("dbo.spProduct_Update", new {product.ProductName, product.Description, product.RetailPrice, product.QuantityInStock, product.IsTaxable }, "RMData");
+        }
     }
 }

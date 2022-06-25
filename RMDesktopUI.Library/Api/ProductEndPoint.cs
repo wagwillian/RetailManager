@@ -55,8 +55,20 @@ namespace RMDesktopUI.Library.Api
                 }
 
             }
+        }
+        
+        public async Task UpdateProduct(ProductModel model)
+        {
+            ProductModel product = new ProductModel();
 
-
-        }        
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PutAsJsonAsync("/api/Product/Update", product))
+            {
+                if(response.IsSuccessStatusCode == false)
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+            
+        }
     }
 }

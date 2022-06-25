@@ -64,6 +64,24 @@ namespace RMApi.Controllers
             return Ok(p);
         }
 
+        [HttpPut]
+        [Authorize]
+        [Route("Update")]
+        public async Task<IActionResult> ProductPut (ProductRegistrationModel product)
+        {
+            ProductModel p = new()
+            {
+                ProductName = product.ProductName,
+                Description = product.Description,
+                RetailPrice = (decimal)product.RetailPrice,
+                QuantityInStock = product.QuantityInStock,
+                IsTaxable = product.IsTaxable,
+                ProductImage = product.ProductImage
+            };
+            _productData.UpdateProduct(p);
+            return Ok(p);
+        }
+
 
     }
 }
