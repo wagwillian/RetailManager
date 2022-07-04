@@ -71,10 +71,10 @@
 
         if(cacheDate is not null)
         {
-            totalMinutes = DateTime.UtcNow.Subtract((DateTime)cacheDate).TotalMinutes;
+            totalMinutes = DateTime.UtcNow.Subtract((DateTime)cacheDate).TotalSeconds;
         }
 
-        if (products is null || cacheDate is null || totalMinutes > 10)
+        if (products is null || cacheDate is null || totalMinutes > 1)
         {
             try
             {

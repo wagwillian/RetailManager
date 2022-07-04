@@ -28,31 +28,31 @@ namespace RMApi.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Privacy()
-        {
+        //public async Task<IActionResult> Privacy()
+        //{
             
-            //Cria os "Roles" na db e adiciona os roles para conta administradora.
-            string[] roles = { "Admin", "Manager", "Cashier" };
+        //    //Cria os "Roles" na db e adiciona os roles para conta administradora.
+        //    string[] roles = { "Admin", "Manager", "Cashier" };
 
-            foreach (var role in roles)
-            {
-                var roleExist = await _roleManager.RoleExistsAsync(role);
-                if (roleExist == false)
-                {
-                    await _roleManager.CreateAsync(new IdentityRole(role));
-                }
-            }
+        //    foreach (var role in roles)
+        //    {
+        //        var roleExist = await _roleManager.RoleExistsAsync(role);
+        //        if (roleExist == false)
+        //        {
+        //            await _roleManager.CreateAsync(new IdentityRole(role));
+        //        }
+        //    }
 
-            var user = await _userManager.FindByEmailAsync("wag_willian@hotmail.com");
+        //    var user = await _userManager.FindByEmailAsync("wag_willian@hotmail.com");
 
-            if (user != null)
-            {
-                await _userManager.AddToRoleAsync(user, "Admin");
-                await _userManager.AddToRoleAsync(user, "Cashier");
-            }
+        //    if (user != null)
+        //    {
+        //        await _userManager.AddToRoleAsync(user, "Admin");
+        //        await _userManager.AddToRoleAsync(user, "Cashier");
+        //    }
 
-            return View();
-        }
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

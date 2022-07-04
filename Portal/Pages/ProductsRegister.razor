@@ -78,7 +78,7 @@
         {
             model.IsTaxable = true;
             await ProducEndPoint.CreateProduct(model);
-            NavManager.NavigateTo("/products-register");
+            NavManager.NavigateTo("/products");
         }
         catch(Exception ex)
         {
