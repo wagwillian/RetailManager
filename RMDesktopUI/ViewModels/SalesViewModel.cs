@@ -319,12 +319,12 @@ namespace RMDesktopUI.ViewModels
             
             await _saleEndPoint.PostSale(sale);
 
-            //foreach(var item in Cart)
-            //{
-            //    var product = await _productEndPoint.GetProductById(item.Product.Id);
-            //    product.QuantityInStock -= item.QuantityInCart;              
+            foreach (var item in Cart)
+            {
+                var product = await _productEndPoint.GetProductById(item.Product.Id);
+                product.QuantityInStock -= item.QuantityInCart;
 
-            //}
+            }
 
             await ResetSalesViewModel();
 
